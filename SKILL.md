@@ -66,6 +66,49 @@ Use when Strategy A fails (Edit tool: no match or ambiguous match).
 
 ---
 
+## Write Protocol — Markdown Files
+
+After **any** of these operations on a vault `.md` file, update `_index.md` in the affected folder(s):
+
+| Operation | Folders to update |
+|---|---|
+| Create new file | Folder where file was created |
+| Delete file | Folder where file was removed |
+| Rename / move file | Both source folder and destination folder |
+| Frontmatter change (title, status, tags) | Folder containing the file |
+
+**This is not optional.** If you write a file and skip the `_index.md` update, the vault navigation is stale.
+
+**Index update steps:**
+1. List all `.md` and `.canvas` files currently in the folder (using Glob or Bash `ls`)
+2. Read the first 15 lines of each `.md` file to get frontmatter (title, status, tags)
+3. Overwrite `_index.md` with the current state — do not append, always full rewrite
+
+**Index format:**
+```
+# /<folder path relative to vault root> — Folder Index
+updated: <YYYY-MM-DD>
+
+## Markdown files
+| File | Title | Status | Tags |
+|------|-------|--------|------|
+| <file.md> | <frontmatter title or filename> | <status or active> | <tags or —> |
+
+## Canvas files
+| File | Nodes | Edges | Manifest |
+|------|-------|-------|---------|
+| <file.canvas> | <N from manifest> | <N from manifest> | [[<file.canvas.manifest>]] |
+
+## Subfolders
+| Folder | Files |
+|--------|-------|
+| <subfolder>/ | <count of md files> |
+```
+
+Omit sections with no content. Do NOT add wikilinks to `[[Home]]` or cluster hubs in subfolder indexes. The root `_index.md` is the only exception (it may link to the 5 cluster hubs).
+
+---
+
 ## Write Protocol — Canvas Files
 
 When creating a new `.canvas` file, ALWAYS follow these conventions:
@@ -109,24 +152,7 @@ Rules for match anchors:
 
 ### Update a folder index
 
-After adding, removing, or renaming a file in a vault folder, update `_index.md` in that folder:
-
-```
-# /<folder path> — Folder Index
-updated: <YYYY-MM-DD>
-
-## Markdown files
-| File | Title | Status | Tags |
-|------|-------|--------|------|
-| <file.md> | <frontmatter title> | <frontmatter status> | <frontmatter tags> |
-
-## Canvas files
-| File | Nodes | Edges | Manifest |
-|------|-------|-------|---------|
-| <file.canvas> | <N> | <N> | [[<file.canvas.manifest>]] |
-```
-
-If a folder has no `.md` or `.canvas` files, do not create `_index.md` for it.
+See **Write Protocol — Markdown Files** above for the full rules and format. Always update `_index.md` after any file operation. If a folder has no `.md` or `.canvas` files, do not create `_index.md` for it.
 
 ---
 
