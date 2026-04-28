@@ -79,6 +79,47 @@ Disabled by default — Claude uses `~/.claude/` memory files instead.
 
 Say **"update vault indexes"** or **"rebuild manifests"** to regenerate all `_index.md` files and canvas manifests across the vault.
 
+## Research mode
+
+Generate an interconnected research cluster into `Research/<topic>/` in your vault:
+
+```
+/obsidian-god:research [topic] effort:[quick|explore|full]
+```
+
+### Effort levels
+
+All levels produce the same quality. Effort controls scope and depth.
+
+| Level   | Pages | WebSearch/page | Min wikilinks/page | Min page types |
+|---------|-------|----------------|--------------------|----------------|
+| quick   | 12    | 1              | 5                  | 4              |
+| explore | 30    | 2              | 7                  | 6              |
+| full    | 55    | 3              | 10                 | 8              |
+
+### What gets generated
+
+```
+Research/<topic>/
+├── _index.md              ← folder index (obsidian-god format)
+├── _MOC.md                ← Map of Content hub page
+├── <page-slug>.md         ← N research pages
+└── 99-Meta/
+    ├── Plan.md            ← page plan (reviewed at Checkpoint 1)
+    ├── Fact-Check-Log.md  ← verified claim log
+    └── Audit.md           ← YAML, orphan, and contradiction report
+```
+
+### Checkpoints
+
+Two mandatory stops:
+1. **After Plan.md** — review the page structure before any writing begins
+2. **After first 5 pages** — validate quality before the full run continues
+
+### Anti-hallucination
+
+Every factual claim is WebSearch-verified before being written. Findings are logged in `Fact-Check-Log.md` as a verified single source of truth — no speculative entries.
+
 ## Reference files
 
 | File | Purpose |
