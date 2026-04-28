@@ -179,10 +179,10 @@ To generate a new research cluster into the vault, use the research sub-skill:
 /obsidian-god:research [topic] effort:[quick|explore|full]
 ```
 
-| Level   | Pages | WebSearch/page | Min wikilinks/page | Min page types |
-|---------|-------|----------------|--------------------|----------------|
-| quick   | 12    | 1              | 5                  | 4              |
-| explore | 30    | 2              | 7                  | 6              |
-| full    | 55    | 3              | 10                 | 8              |
+| Level   | Pages | Batch size | WebSearch/page | Min wikilinks/page | Min page types |
+|---------|-------|------------|----------------|--------------------|----------------|
+| quick   | 12    | 5          | 1              | 5                  | 4              |
+| explore | 30    | 5          | 2              | 7                  | 6              |
+| full    | 55    | 5          | 3              | 10                 | 8              |
 
 Output lands in `Research/<topic>/` in the existing vault. See `research.md` for the full protocol.
