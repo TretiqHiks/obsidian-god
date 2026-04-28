@@ -168,3 +168,21 @@ For format details and full examples, read these references only when needed:
 - `references/canvas-manifest-format.md` — full manifest format + annotated example
 - `references/folder-index-format.md` — full `_index.md` format + annotated example
 - `references/vault-config-schema.md` — all `_vault-config.md` fields with defaults
+
+---
+
+## Research Mode
+
+To generate a new research cluster into the vault, use the research sub-skill:
+
+```
+/obsidian-god:research [topic] effort:[quick|explore|full]
+```
+
+| Level   | Pages | WebSearch/page | Min wikilinks/page | Min page types |
+|---------|-------|----------------|--------------------|----------------|
+| quick   | 12    | 1              | 5                  | 4              |
+| explore | 30    | 2              | 7                  | 6              |
+| full    | 55    | 3              | 10                 | 8              |
+
+Output lands in `Research/<topic>/` in the existing vault. See `research.md` for the full protocol.
