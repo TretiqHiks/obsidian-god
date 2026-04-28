@@ -100,6 +100,9 @@ For each page:
    - Only log after confirming or denying — no speculative entries
 
 After all 5 pages in the batch: output a one-line status:
+
+Compute total batch count as `ceil(page_count / 5)` and use that value as N in all status lines.
+
 > "Batch 1/N complete (5 pages written). Continuing..."
 
 **CHECKPOINT 2** — Stop after first batch. Output:
@@ -116,6 +119,8 @@ Write remaining pages in batches of 5 using the same per-page protocol as Phase 
 After each batch output a one-line status: `"Batch N/Total complete (X/Y pages written). Continuing..."`
 
 No further checkpoints. User may interrupt at any time by sending a message.
+
+The final batch may contain fewer than 5 pages; write all remaining pages and report the actual count in the status line.
 
 ---
 
@@ -152,6 +157,9 @@ Group pages by type. Every page must appear exactly once.
 Check all pages and write `99-Meta/Audit.md` with findings:
 
 - YAML frontmatter: all required fields present on every page?
+
+Note: `_MOC.md` uses type `moc` and is exempt from page-type distribution and minimum-type checks.
+
 - Orphaned pages: any page with zero wikilinks pointing to it?
 - Wikilink targets: do all `[[wikilinks]]` resolve to a real page in the cluster?
 - Contradictions: flag any pages that make conflicting factual claims
@@ -193,6 +201,8 @@ updated: <YYYY-MM-DD>
 ```
 
 2. Check if `Research/_index.md` exists. If yes, append a row for this cluster. If no, create it with this cluster as the first entry.
+
+3. Write `Research/<topic>/99-Meta/_index.md` listing Plan.md, Fact-Check-Log.md, and Audit.md in the standard folder index format.
 
 ---
 
